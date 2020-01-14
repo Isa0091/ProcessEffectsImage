@@ -36,7 +36,7 @@ namespace ImageProcessEffects.Controllers
         /// <param name="processDataImage"></param>
         /// <returns></returns>
         [HttpPost("TonoImagen")]
-        [ProducesResponseType(200)]
+        [ProducesResponseType(200,Type= typeof(ResultProcessImageDTO))]
         public IActionResult AgregarEfectoTono([FromBody] ProcessDataImageDTO processDataImage)
         {
             ResultProcessImageDTO resultProcessImage = _effectImageService.AddEffectoImagen(processDataImage);
@@ -49,7 +49,7 @@ namespace ImageProcessEffects.Controllers
         /// <param name="processDataImage"></param>
         /// <returns></returns>
         [HttpPost("TonosImagenes")]
-        [ProducesResponseType(200)]
+        [ProducesResponseType(200, Type = typeof(List<ResultProcessImageDTO>))]
         public IActionResult AgregarTonalidadesAImagenes([FromBody] ProcessImagesInputDTO processImagesInput)
         {
             List<ResultProcessImageDTO> resultProcessImages = new List<ResultProcessImageDTO>();
