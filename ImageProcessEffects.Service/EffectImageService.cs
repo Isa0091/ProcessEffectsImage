@@ -40,7 +40,15 @@ namespace ImageProcessEffects.Service
             switch (processDataImage.TipoEffecto)
             {
                 case Core.Enums.TipoEffecto.Sepia:
-
+                    image = _processEffectsImageProvider.ProcesarTonoSepia(image);
+                    break;
+                case Core.Enums.TipoEffecto.Trasnparencia:
+                    image = _processEffectsImageProvider.ProcesarTonoSepia(image);
+                    break;
+                case Core.Enums.TipoEffecto.Negativo:
+                    image = _processEffectsImageProvider.ProcesarTonoSepia(image);
+                    break;
+                case Core.Enums.TipoEffecto.EscalaGris:
                     image = _processEffectsImageProvider.ProcesarTonoSepia(image);
                     break;
             }

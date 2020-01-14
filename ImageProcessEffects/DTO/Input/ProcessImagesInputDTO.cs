@@ -1,15 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
+using System.Linq;
+using System.Threading.Tasks;
 using static ImageProcessEffects.Core.Enums;
 
-namespace ImageProcessEffects.Core.DTO.ProcessImageDTO
+namespace ImageProcessEffects.DTO.Input
 {
     /// <summary>
-    ///Esta clase envia lo necesario para el procesamiento de 
-    ///la imagen
+    /// procesa una imagen a varios efectos
     /// </summary>
-    public class ProcessDataImageDTO
+    public class ProcessImagesInputDTO
     {
         /// <summary>
         /// la iamgen en base 64 la cual se procesara
@@ -26,7 +26,7 @@ namespace ImageProcessEffects.Core.DTO.ProcessImageDTO
         /// <summary>
         /// indica el tipo de efecto que se le dara a la imagen
         /// </summary>
-        public TipoEffecto TipoEffecto { get; set; }
+        public List<TipoEffecto> TiposEffectos { get; set; }
         /// <summary>
         /// enum que identifica el tipo de formato de la imagen
         /// </summary>
