@@ -41,6 +41,7 @@ namespace ImageProcessEffects.Service.Providers
                             new float[]{1, 1, 1, 1, 1}
                         });
 
+            imageAttributes.SetColorMatrix(colorMatrix);
             Graphics g = Graphics.FromImage(bmpInverted);
             g.DrawImage(img, new Rectangle(0, 0, img.Width, img.Height), 0, 0, img.Width, img.Height, GraphicsUnit.Pixel, imageAttributes);
             g.Dispose();
@@ -62,6 +63,7 @@ namespace ImageProcessEffects.Service.Providers
                             new float[]{0, 0, 0, 0, 1}
                        });
 
+            imageAttributes.SetColorMatrix(colorMatrix);
             Graphics g = Graphics.FromImage(bmpInverted);
             g.DrawImage(img, new Rectangle(0, 0, img.Width, img.Height), 0, 0, img.Width, img.Height, GraphicsUnit.Pixel, imageAttributes);
             g.Dispose();
