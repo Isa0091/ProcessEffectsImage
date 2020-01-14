@@ -31,7 +31,9 @@ namespace ImageProcessEffects.Service
             using (MemoryStream ms = new MemoryStream(bytes))
             {
                 image = Image.FromStream(ms);
-                image = _processEffectsImageProvider.RedimencionarImagen(image, processDataImage.Alto, processDataImage.Ancho);
+
+                if(processDataImage.Alto.HasValue && processDataImage.Ancho.HasValue)
+                image = _processEffectsImageProvider.RedimencionarImagen(image,(int) processDataImage.Alto,(int)processDataImage.Ancho);
             }
 
 

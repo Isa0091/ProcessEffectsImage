@@ -15,7 +15,10 @@ namespace ImageProcessEffects.Core
         /// </summary>
         public enum TipoEffecto
         {
-            Sepia = 0
+            Sepia = 0,
+            EscalaGris= 1,
+            Trasnparencia=2,
+            Negativo=3
         };
         /// <summary>
         /// enum que define los tipos de formatos

@@ -18,11 +18,11 @@ namespace ImageProcessEffects.Core.DTO.ProcessImageDTO
         /// <summary>
         /// el alto de la imagen a procesar
         /// </summary>
-        public int Alto { get; set; }
+        public int? Alto { get; set; }
         /// <summary>
         /// el ancho de la imagen a procesar
         /// </summary>
-        public int Ancho { get; set; }
+        public int? Ancho { get; set; }
         /// <summary>
         /// indica el tipo de efecto que se le dara a la imagen
         /// </summary>

@@ -32,11 +32,29 @@ namespace ImageProcessEffects.Core.Providers
         /// <returns></returns>
         string ImagenToBase64(Image img, ImageFormat format);
         /// <summary>
-        /// redimenciona una iumagen con datos especificos
+        /// redimenciona una imagen con datos especificos
         /// </summary>
         /// <param name="alto"></param>
         /// <param name="Ancho"></param>
         /// <returns></returns>
         Image RedimencionarImagen(Image img,int alto, int Ancho);
+        /// <summary>
+        /// procesa una imagen con transparecia
+        /// </summary>
+        /// <param name="img"></param>
+        /// <returns></returns>
+        Image ProcesarTransparecia(Image img);
+        /// <summary>
+        /// procesa una imagen para hacerla tono negativa
+        /// </summary>
+        /// <param name="img"></param>
+        /// <returns></returns>
+        Image ProcesarNegativa(Image img);
+        /// <summary>
+        /// procesa una imagen a tono de escala de grises
+        /// </summary>
+        /// <param name="img"></param>
+        /// <returns></returns>
+        Image ProcesarEscalaGrises(Image img);
     }
 }

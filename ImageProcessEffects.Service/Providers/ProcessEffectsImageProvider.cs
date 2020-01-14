@@ -28,7 +28,71 @@ namespace ImageProcessEffects.Service.Providers
             }
         }
 
-    
+        public Image ProcesarNegativa(Image img)
+        {
+            Bitmap bmpInverted = new Bitmap(img.Width, img.Height);
+            ImageAttributes imageAttributes = new ImageAttributes();
+            ColorMatrix colorMatrix = new ColorMatrix(new float[][]
+                        {
+                            new float[]{-1, 0, 0, 0, 0},
+                            new float[]{0, -1, 0, 0, 0},
+                            new float[]{0, 0, -1, 0, 0},
+                            new float[]{0, 0, 0, 1, 0},
+                            new float[]{1, 1, 1, 1, 1}
+                        });
+
+            Graphics g = Graphics.FromImage(bmpInverted);
+            g.DrawImage(img, new Rectangle(0, 0, img.Width, img.Height), 0, 0, img.Width, img.Height, GraphicsUnit.Pixel, imageAttributes);
+            g.Dispose();
+            img = bmpInverted;
+
+            return img;
+        }
+
+        public  Image ProcesarEscalaGrises(Image img)
+        {
+            Bitmap bmpInverted = new Bitmap(img.Width, img.Height);
+            ImageAttributes imageAttributes = new ImageAttributes();
+            ColorMatrix colorMatrix = new ColorMatrix(new float[][]
+                       {
+                            new float[]{.3f, .3f, .3f, 0, 0},
+                            new float[]{.59f, .59f, .59f, 0, 0},
+                            new float[]{.11f, .11f, .11f, 0, 0},
+                            new float[]{0, 0, 0, 1, 0},
+                            new float[]{0, 0, 0, 0, 1}
+                       });
+
+            Graphics g = Graphics.FromImage(bmpInverted);
+            g.DrawImage(img, new Rectangle(0, 0, img.Width, img.Height), 0, 0, img.Width, img.Height, GraphicsUnit.Pixel, imageAttributes);
+            g.Dispose();
+            img = bmpInverted;
+
+            return img;
+        }
+
+        public Image ProcesarTransparecia(Image img)
+        {
+            Bitmap bmpInverted = new Bitmap(img.Width, img.Height);
+            ImageAttributes imageAttributes = new ImageAttributes();
+            ColorMatrix colorMatrix = new ColorMatrix(new float[][]
+                        {
+                            new float[]{1, 0, 0, 0, 0},
+                            new float[]{0, 1, 0, 0, 0},
+                            new float[]{0, 0, 1, 0, 0},
+                            new float[]{0, 0, 0, 0.3f, 0},
+                            new float[]{0, 0, 0, 0, 1}
+                        });
+
+            imageAttributes.SetColorMatrix(colorMatrix);
+
+            Graphics g = Graphics.FromImage(bmpInverted);
+            g.DrawImage(img, new Rectangle(0, 0, img.Width, img.Height), 0, 0, img.Width, img.Height, GraphicsUnit.Pixel, imageAttributes);
+            g.Dispose();
+            img = bmpInverted;
+
+            return img;
+        }
+        
         public Image ProcesarTonoSepia(Image img)
         {
             Bitmap bmpInverted = new Bitmap(img.Width, img.Height);
