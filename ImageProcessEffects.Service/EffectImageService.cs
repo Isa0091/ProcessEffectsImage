@@ -43,13 +43,13 @@ namespace ImageProcessEffects.Service
                     image = _processEffectsImageProvider.ProcesarTonoSepia(image);
                     break;
                 case Core.Enums.TipoEffecto.Trasnparencia:
-                    image = _processEffectsImageProvider.ProcesarTonoSepia(image);
+                    image = _processEffectsImageProvider.ProcesarTransparecia(image);
                     break;
                 case Core.Enums.TipoEffecto.Negativo:
-                    image = _processEffectsImageProvider.ProcesarTonoSepia(image);
+                    image = _processEffectsImageProvider.ProcesarNegativa(image);
                     break;
                 case Core.Enums.TipoEffecto.EscalaGris:
-                    image = _processEffectsImageProvider.ProcesarTonoSepia(image);
+                    image = _processEffectsImageProvider.ProcesarEscalaGrises(image);
                     break;
             }
 
