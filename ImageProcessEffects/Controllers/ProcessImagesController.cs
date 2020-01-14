@@ -12,6 +12,8 @@ using System.IO;
 using ImageProcessEffects.Core.Service;
 using ImageProcessEffects.Core.DTO.ProcessImageDTO;
 using ImageProcessEffects.DTO.Input;
+using Microsoft.Extensions.Hosting;
+using AutoMapper;
 
 namespace ImageProcessEffects.Controllers
 {
@@ -19,13 +21,13 @@ namespace ImageProcessEffects.Controllers
     [ApiController]
     public class ProcessImagesController : ControllerBase
     {
-        private IHostingEnvironment _env;
         private readonly IEffectImageService _effectImageService;
+        private readonly IMapper _mapper;
 
-        public ProcessImagesController(IHostingEnvironment env, IEffectImageService effectImageService)
+        public ProcessImagesController(IMapper mapper,IEffectImageService effectImageService)
         {
-            _env = env;
             _effectImageService = effectImageService;
+            _mapper = mapper;
         }
 
         /// <summary>
@@ -51,19 +53,14 @@ namespace ImageProcessEffects.Controllers
         public IActionResult AgregarTonalidadesAImagenes([FromBody] ProcessImagesInputDTO processImagesInput)
         {
             List<ResultProcessImageDTO> resultProcessImages = new List<ResultProcessImageDTO>();
+            //mapeo mi dto de entrada del api a uno que necesaita el servicio
+            ProcessDataImageDTO processDataImage = _mapper.Map<ProcessDataImageDTO>(processImagesInput);
 
+            //recorro los efectos ya que la demas data< es igul para todo
             processImagesInput.TiposEffectos.ForEach(z =>
             {
-                ProcessDataImageDTO processDataImage = new ProcessDataImageDTO()
-                {
-                     Alto= processImagesInput.Alto,
-                     Ancho= processImagesInput.Ancho,
-                     Calidad= processImagesInput.Calidad,
-                     formatoImagen= processImagesInput.formatoImagen,
-                     ImagenBase64= processImagesInput.ImagenBase64,
-                     TipoEffecto= z
-                };
-                ResultProcessImageDTO resultProcessImage = _effectImageService.AddEffectoImagen(processDataImage);
+                 processDataImage.TipoEffecto = z;
+                 ResultProcessImageDTO resultProcessImage = _effectImageService.AddEffectoImagen(processDataImage);
                 resultProcessImages.Add(resultProcessImage);
             });
            
