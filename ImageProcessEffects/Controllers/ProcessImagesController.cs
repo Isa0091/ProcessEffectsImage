@@ -34,70 +34,11 @@ namespace ImageProcessEffects.Controllers
         /// <returns></returns>
         [HttpPost()]
         [ProducesResponseType(200)]
-        public async Task<IActionResult> AgregarEfecto([FromBody] ProcessDataImageDTO processDataImage )
+        public IActionResult AgregarEfecto([FromBody] ProcessDataImageDTO processDataImage)
         {
             ResultProcessImageDTO resultProcessImage = _effectImageService.AddEffectoImagen(processDataImage);
             return Ok(resultProcessImage);
         }
 
-
-
-        private void GuardarImagen(string imagenBase64)
-        {
-
-            var webRoot = _env.WebRootPath;
-            var PathWithFolderName = "~/Temp";
-
-            if (!Directory.Exists(PathWithFolderName))
-            {
-                // Try to create the directory.
-                DirectoryInfo di = Directory.CreateDirectory(PathWithFolderName);
-
-
-                string Base64String = imagenBase64.Replace("data:image/png;base64,", "");
-
-                byte[] bytes = Convert.FromBase64String(Base64String);
-
-                Image image;
-                using (MemoryStream ms = new MemoryStream(bytes))
-                {
-
-                    image = Image.FromStream(ms);
-                    Bitmap bmpInverted = new Bitmap(image.Width, image.Height);
-
-                    ImageAttributes imageAttributes = new ImageAttributes();
-                    imageAttributes.SetColorMatrix(DrawAsSepiaTone());
-                    Graphics g = Graphics.FromImage(bmpInverted);
-                    g.DrawImage(image, new Rectangle(0, 0, image.Width, image.Height), 0, 0, image.Width, image.Height, GraphicsUnit.Pixel, imageAttributes);
-                    g.Dispose();
-
-                    image = bmpInverted;
-                }
-
-                image.Save(PathWithFolderName + "/ImageName.png");
-            }
-
-        }
-
-        private ColorMatrix DrawAsSepiaTone()
-        {
-            ColorMatrix colorMatrix = new ColorMatrix(new float[][]
-                       {
-                        new float[]{.393f, .349f, .272f, 0, 0},
-                        new float[]{.769f, .686f, .534f, 0, 0},
-                        new float[]{.189f, .168f, .131f, 0, 0},
-                        new float[]{0, 0, 0, 1, 0},
-                        new float[]{0, 0, 0, 0, 1}
-                       });
-
-            return colorMatrix;
-        }
-
-
-        private byte[] ImageToByte(Image img)
-        {
-            ImageConverter converter = new ImageConverter();
-            return (byte[])converter.ConvertTo(img, typeof(byte[]));
-        }
     }
 }
